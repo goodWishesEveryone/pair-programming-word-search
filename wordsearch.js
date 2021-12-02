@@ -1,13 +1,9 @@
-// const wordSearch = (letters, word) => {
-//     const horizontalJoin = letters.map(ls => ls.join(''))
-//     for (l of horizontalJoin) {
-//         if (l.includes(word)) return true
-//     }
-// }
+// Word search solver, is a function that receives a 2D array of letters and a word. The function must:
+// Check to find the word horizontally and vertically
+// Return true if the word is found, and return false if the word is not found
 
-// module.exports = wordSearch
 
-const transpose = function (matrix) {
+const transpose = function(matrix) {
   // iterate over the rows, and then over each element. after that we append each element to the new result list, via the element's index
   let result = []; // initialize empty result array
   for (let i in matrix) {
@@ -25,22 +21,27 @@ const transpose = function (matrix) {
 };
 
 const wordSearch = (letters, word) => {
-  const horizontalJoin = letters.map((ls) => ls.join(""));
+  const horizontalJoin = letters.map(ls => ls.join(''));
   const vertical = transpose(letters);
-  const verticalJoin = vertical.map((ls) => ls.join(""));
-  for (l of horizontalJoin) {
-    //console.log(l, "this is L")
-    if (l === word) {
+  const verticalJoin = vertical.map(ls => ls.join(''));
+  for (let h of horizontalJoin) {
+    if (h === word) {
       return true;
     }
   }
-  for (v of verticalJoin) {
+  for (let v of verticalJoin) {
     if (v === word) {
       return true;
     }
   }
-  if (word === "") {
-    return "What word would you like to search?";
+  if (word === null || word === undefined) {
+    return false;
+  }
+  if (word === '') {
+    return 'What word would you like to search?';
+  }
+  if (word.length === 0) {
+    return false;
   }
   return false;
 };
